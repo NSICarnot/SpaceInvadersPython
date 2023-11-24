@@ -1,7 +1,9 @@
 import pygame
 import constants as c
-from elements.player import Player
 import time
+
+from elements.player import Player
+from elements.shield import Shield
 
 # Initialize the pygame window
 pygame.init()
@@ -17,10 +19,14 @@ player_group = pygame.sprite.Group()
 player_group.add(player)
 player.set_pos(c.WIDTH//2, 550)
 
+shield = Shield(100, 1)
+
 # Main loop of the game
 while True:
     player_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
     player_group.draw(screen)
+
+    shield.draw(screen)
 
     # Parsing all pygame events
     for event in pygame.event.get():
@@ -41,9 +47,8 @@ while True:
         if player.rect.x > 0:
             player.move_left(c.PLAYER_SPEED)
 
-    time.sleep(0.005)
-
     clock.tick(240)
 
     # Update the screen
     pygame.display.flip()
+    pygame.display.update()
