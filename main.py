@@ -19,7 +19,7 @@ player_group = pygame.sprite.Group()
 player_group.add(player)
 player.set_pos(c.WIDTH//2, 550)
 
-shield = Shield(100, 10)
+shield = Shield(100, 1)
 
 # Main loop of the game
 while True:

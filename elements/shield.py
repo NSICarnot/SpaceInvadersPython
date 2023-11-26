@@ -4,8 +4,8 @@ import constants as c
 
 class Pixel():
     def __init__(self, x: int, y: int, size: int) -> None:
-        self.__size = size
-        self.__rect = pygame.Rect(x, y, self.__size, self.__size)
+        self.__size: int = size
+        self.__rect: pygame.Rect = pygame.Rect(x, y, self.__size, self.__size)
 
     def get_pos(self) -> tuple[int]:
         return self.__pos
@@ -21,7 +21,7 @@ class Pixel():
 
     def draw(self, screen: pygame.Surface) -> None:
         pygame.draw.rect(
-            screen, c.GREEN, (self.__rect.x + 1, self.__rect.y + 1, self.__rect.x + self.__size - 1, self.__rect.y + self.__size - 1))
+            screen, c.GREEN, (self.__rect.x, self.__rect.y, self.__size, self.__size))
 
 
 class Shield():
@@ -32,9 +32,9 @@ class Shield():
         self.__pixels: list[Pixel] = []
 
         # Create the shield Pixels list
-        for y in range(10):
+        for y in range(100):
             self.__pixels.append([])
-            for x in range(10):
+            for x in range(100):
                 self.__pixels[y].append(
                     Pixel(self.__pos[0] + x * self.__size, self.__pos[1] + y * self.__size, self.__size))
 
@@ -57,3 +57,11 @@ class Shield():
         for p_line in self.__pixels:
             for pixel in p_line:
                 pixel.draw(screen)
+
+    def pixels_blow_up(self, x: int, y: int, force: float) -> None:
+        """
+        Pop the calculated pixels which were in the radius of the explosion
+        :param x: The x coordinate of the impact
+        :param y: The y coordinate of the impact 
+        """
+        ...
