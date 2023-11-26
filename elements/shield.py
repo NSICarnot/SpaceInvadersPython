@@ -1,4 +1,6 @@
 import pygame
+import math
+
 import constants as c
 
 
@@ -29,7 +31,7 @@ class Shield():
         # The position anchor is the left top hand corner
         self.__pos: tuple[int] = (x, c.SHIELD_HEIGHT)
         self.__size: int = size
-        self.__pixels: list[Pixel] = []
+        self.__pixels: list[list[Pixel | None]] = []
 
         # Create the shield Pixels list
         for y in range(100):
@@ -56,12 +58,17 @@ class Shield():
     def draw(self, screen: pygame.Surface) -> None:
         for p_line in self.__pixels:
             for pixel in p_line:
-                pixel.draw(screen)
+                if pixel != None:
+                    pixel.draw(screen)
 
-    def pixels_blow_up(self, x: int, y: int, force: float) -> None:
+    def blow_up_pixels(self, x: int, y: int, radius: float) -> None:
         """
         Pop the calculated pixels which were in the radius of the explosion
         :param x: The x coordinate of the impact
         :param y: The y coordinate of the impact 
         """
-        ...
+        for yp, p_line in enumerate(self.__pixels):
+            for xp, _ in enumerate(p_line):
+                if math.sqrt((xp - x) ** 2 + (yp - y) ** 2) <= radius:
+                    self.__pixels[yp].pop(xp)
+                    self.__pixels[yp].insert(xp, None)

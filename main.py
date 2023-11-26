@@ -23,6 +23,8 @@ shield = Shield(100, 1)
 
 # Main loop of the game
 while True:
+    screen.fill(c.BLACK)
+
     player_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
     player_group.draw(screen)
 
@@ -37,6 +39,8 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 screen.fill(c.BLACK)
+            if event.key == pygame.K_a:
+                shield.blow_up_pixels(50, 0, 15)
 
     # Permet de faire bouger le vaisseau du joueur
     if pygame.key.get_pressed()[pygame.K_RIGHT]:
@@ -50,5 +54,4 @@ while True:
     clock.tick(240)
 
     # Update the screen
-    pygame.display.flip()
     pygame.display.update()
