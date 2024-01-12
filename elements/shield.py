@@ -1,5 +1,6 @@
 import pygame
 import math
+import random as r
 
 import constants as c
 
@@ -69,6 +70,8 @@ class Shield():
         """
         for yp, p_line in enumerate(self.__pixels):
             for xp, _ in enumerate(p_line):
-                if math.sqrt((xp - x) ** 2 + (yp - y) ** 2) <= radius:
-                    self.__pixels[yp].pop(xp)
-                    self.__pixels[yp].insert(xp, None)
+                rand: int = r.randint(1, 5)
+                if not rand == 3:
+                    if math.sqrt((xp - x) ** 2 + (yp - y) ** 2) <= radius:
+                        self.__pixels[yp].pop(xp)
+                        self.__pixels[yp].insert(xp, None)
