@@ -3,14 +3,14 @@ from player import Player
 
 
 class Projectile(pygame.sprite.Sprite):
-    def __init__(self, master: Player):
+    def __init__(self, player: Player):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("img/projectile.png")
         self.rect = self.image.get_rect()
-        self.__master = master
+        self.__player = player
 
-    def set_master_shoot_variable(self) -> None:
-        self.__master.can_shoot(not self.__master.can_shoot())
+    def set_player_shoot_variable(self) -> None:
+        self.__player.can_shoot(not self.__player.can_shoot())
 
     def set_pos(self, x: int, y: int):
         self.rect.y = y

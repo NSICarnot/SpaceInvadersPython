@@ -64,7 +64,7 @@ class Shield():
 
     def blow_up_pixels(self, x: int, y: int, radius: float) -> None:
         """
-        Pop the calculated pixels which were in the radius of the explosion
+        Pop the calculated pixels which were in the radius of the explosion. Somme pixels won't be deleted to looks like the original game.
         :param x: The x coordinate of the impact
         :param y: The y coordinate of the impact 
         """
