@@ -45,10 +45,23 @@ def main() -> None:
 def rewards() -> None:
     rewards_scene.draw_container(screen)
     
+    # Move scrollbar with keys
+    if pygame.key.get_pressed()[pygame.K_LEFT]:
+        rewards_scene.scrollbar.set_pos(rewards_scene.scrollbar.rect.x - 1, rewards_scene.scrollbar.rect.y)
+    elif pygame.key.get_pressed()[pygame.K_RIGHT]:
+        rewards_scene.scrollbar.set_pos(rewards_scene.scrollbar.rect.x + 1, rewards_scene.scrollbar.rect.y)
+        
+    # Move scrollbar with mouse
+    # TODO: Ca me casse les couilless !!!
+    """if pygame.mouse.get_pressed()[0]:
+        mouse_pos = pygame.mouse.get_pos()
+        x_offset = mouse_pos[0] - rewards_scene.scrollbar.rect.x - 1
+        if rewards_scene.scrollbar.rect.collidepoint((mouse_pos[0] - x_offset, mouse_pos[1])):
+            rewards_scene.scrollbar.set_pos(pygame.mouse.get_pos()[0] - x_offset, rewards_scene.scrollbar.rect.y)"""
+
     
 def pause() -> None:
     c.GAME_STATE = GameState.REWARDS
-    print(1)
     
 
 def score() -> None:
