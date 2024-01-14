@@ -4,6 +4,8 @@ import time
 
 from elements.player import Player
 from elements.shield import Shield
+from game_states import GameState
+from rewards.rewards import Rewards
 
 # Initialize the pygame window
 pygame.init()
@@ -21,14 +23,41 @@ player.set_pos(c.WIDTH//2, 550)
 
 shield = Shield(100, 1)
 
-# Main loop of the game
-while True:
-    screen.fill(c.BLACK)
+rewards_scene = Rewards()
 
+
+def main() -> None:
     player_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
     player_group.draw(screen)
 
     shield.draw(screen)
+    
+    # Permet de faire bouger le vaisseau du joueur
+    if pygame.key.get_pressed()[pygame.K_RIGHT]:
+        if player.rect.x < c.WIDTH - player.rect.width:
+            player.move_right(c.PLAYER_SPEED)
+
+    if pygame.key.get_pressed()[pygame.K_LEFT]:
+        if player.rect.x > 0:
+            player.move_left(c.PLAYER_SPEED)
+
+
+def rewards() -> None:
+    rewards_scene.draw_container(screen)
+    
+    
+def pause() -> None:
+    c.GAME_STATE = GameState.REWARDS
+    print(1)
+    
+
+def score() -> None:
+    ...
+
+
+# Main loop of the game
+while True:
+    screen.fill(c.BLACK)
 
     # Parsing all pygame events
     for event in pygame.event.get():
@@ -41,15 +70,16 @@ while True:
                 screen.fill(c.BLACK)
             if event.key == pygame.K_a:
                 shield.blow_up_pixels(50, 0, 15)
-
-    # Permet de faire bouger le vaisseau du joueur
-    if pygame.key.get_pressed()[pygame.K_RIGHT]:
-        if player.rect.x < c.WIDTH - player.rect.width:
-            player.move_right(c.PLAYER_SPEED)
-
-    if pygame.key.get_pressed()[pygame.K_LEFT]:
-        if player.rect.x > 0:
-            player.move_left(c.PLAYER_SPEED)
+    
+    match c.GAME_STATE:
+        case GameState.PAUSE:
+            pause()
+        case GameState.PLAY:
+            main()
+        case GameState.REWARDS:
+            rewards()
+        case GameState.SCORE:
+            score()
 
     clock.tick(240)
 
