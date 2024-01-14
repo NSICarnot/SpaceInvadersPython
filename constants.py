@@ -5,7 +5,7 @@ WIDTH: int = 900
 HEIGHT: int = 700
 
 BLACK: tuple[int, int, int] = (0, 0, 0)
-WHITE: tuple[int, int, int] = (55, 255, 255)
+WHITE: tuple[int, int, int] = (255, 255, 255)
 GREEN: tuple[int, int, int] = (0, 255, 0)
 PURPLE: tuple[int, int, int] = (100, 0, 255)
 

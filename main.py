@@ -52,12 +52,11 @@ def rewards() -> None:
         rewards_scene.scrollbar.set_pos(rewards_scene.scrollbar.rect.x + 1, rewards_scene.scrollbar.rect.y)
         
     # Move scrollbar with mouse
-    # TODO: Ca me casse les couilless !!!
     """if pygame.mouse.get_pressed()[0]:
         mouse_pos = pygame.mouse.get_pos()
-        x_offset = mouse_pos[0] - rewards_scene.scrollbar.rect.x - 1
-        if rewards_scene.scrollbar.rect.collidepoint((mouse_pos[0] - x_offset, mouse_pos[1])):
-            rewards_scene.scrollbar.set_pos(pygame.mouse.get_pos()[0] - x_offset, rewards_scene.scrollbar.rect.y)"""
+        x_offset = mouse_pos[0] - rewards_scene.scrollbar.rect.x
+        if rewards_scene.scrollbar.rect.collidepoint((mouse_pos[0], mouse_pos[1])):
+            rewards_scene.scrollbar.set_pos(pygame.mouse.get_pos()[0], rewards_scene.scrollbar.rect.y)"""
 
     
 def pause() -> None:
