@@ -1,4 +1,9 @@
 import pygame
+
+# Initialize the pygame window
+pygame.init()
+pygame.font.init()
+
 import constants as c
 import time
 
@@ -7,8 +12,6 @@ from elements.shield import Shield
 from game_states import GameState
 from rewards.rewards import Rewards
 
-# Initialize the pygame window
-pygame.init()
 
 # Create the screen and setting up its name
 screen: pygame.Surface = pygame.display.set_mode((c.WIDTH, c.HEIGHT))
@@ -96,4 +99,5 @@ while True:
     clock.tick(240)
 
     # Update the screen
+    pygame.display.flip()
     pygame.display.update()

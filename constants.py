@@ -1,4 +1,5 @@
 from game_states import GameState
+from pygame import font
 # GAME VARIABLES
 
 WIDTH: int = 900
@@ -15,3 +16,5 @@ PLAYER_SPEED: int = 1
 SHIELD_HEIGHT: int = 450
 
 GAME_STATE: GameState = GameState.PAUSE
+
+GAME_FONT: font.Font = font.Font("./font/font.ttf")
