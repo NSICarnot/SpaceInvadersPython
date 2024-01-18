@@ -7,6 +7,8 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load("img/player.png")
         self.rect = self.image.get_rect()
         self.__can_shoot: bool = True
+        self.lifes: int = 3
+        self.died: bool = False
 
     def get_rect(self) -> pygame.Rect:
         return self.rect
@@ -34,14 +36,51 @@ class Player(pygame.sprite.Sprite):
         else:
             self.__can_shoot = value
     
-    def get_lifes_count() -> int:
-        ...
+    def get_lifes_count(self) -> int:
+        """
+        Return the number of lifes of the player
+        :return: The number of lifes of the player
+        """
+        return self.lifes
         
-    def set_lifes_count() -> None:
-        ...
+    def set_lifes_count(self, new: int) -> None:
+        """
+        Set the number of lifes of the player
+        :param new: The new number of lifes of the player
+        :return: None
+        """
+        assert new > 3, "Le joueur ne peut avoir que trois vie max"
+        if new == 0:
+            self.died = True
+        self.lifes = new
         
-    def add_one_life() -> None:
-        ...
+    def add_one_life(self) -> None:
+        """
+        Add a number of lifes to the player
+        :return: None
+        """
+        assert 1 + self.lifes > 3, "Le joueur ne peut avoir que trois vie max"
+        self.lifes += 1
+        if self.lifes == 0:
+            self.died = True
+        else:
+            self.died = False
         
-    def remove_one_life() -> None:
-        ...
+    def remove_one_life(self) -> None:
+        """
+        Remove one life to the player
+        :return: None
+        """
+        assert self.lifes == 0, "Le nombre de vie du joueur est déjà au minimum."
+        self.lifes -= 1
+        if self.lifes == 0:
+            self.died = True
+        else:
+            self.died = False
+
+    def is_died(self) -> bool:
+        """
+        Return a boolean if the player is died or not
+        :return: A boolean if the player is died or not
+        """
+        return self.died
