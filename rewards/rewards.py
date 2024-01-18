@@ -1,12 +1,14 @@
 import pygame
 
 import constants as c
+from elements.home_button import HomeButton
 
 
 class Rewards:
     def __init__(self) -> None:
         self.font_size = 12
         self.image_size = 64
+        self.spacement = 120
 
         # Container variables
         self.left_margin = 20
@@ -15,25 +17,31 @@ class Rewards:
         self.c_height = c.HEIGHT - 2*self.top_margin
         
         self.items = [
-            _Item(100, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test", 0),
-            _Item(200, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test2", 0),
-            _Item(300, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test3", 0)
+            _Item(self.spacement, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test", 0),
+            _Item(2 * self.spacement, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test2", 0),
+            _Item(3 * self.spacement, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test3", 0),
+            _Item(4 * self.spacement, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test4", 0),
+            _Item(5 * self.spacement, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test5", 0),
+            _Item(6 * self.spacement, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test6", 0),
+            _Item(7 * self.spacement, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test7", 0),
         ]
 
         # Scrollbar
         self.scrollbar = _ScrollBar(2 * self.left_margin, c.HEIGHT - self.top_margin -
                                     2 * self.left_margin, 100, self.left_margin, self.left_margin)
+        self.home_button = HomeButton()
 
-    def draw_container(self, screen: pygame.Surface) -> None:
+    def draw(self, screen: pygame.Surface) -> None:
         # TODO: Draw items first
-        for item in self.items:
+        for i, item in enumerate(self.items):
+            item.set_pos((i + 1) * self.spacement - self.scrollbar.get_percent() * (c.WIDTH / self.spacement), item.get_pos()[1])
             item.draw(screen)
 
         # Black effect
         pygame.draw.rect(screen, c.BLACK, (0, self.top_margin + self.left_margin,
                          4 * self.left_margin - 1, self.top_margin - 2 * self.left_margin))
-        pygame.draw.rect(screen, c.BLACK, (c.WIDTH - 4 * self.left_margin - 1, self.top_margin +
-                         self.left_margin, 4 * self.left_margin, self.top_margin - 2 * self.left_margin))
+        pygame.draw.rect(screen, c.BLACK, (c.WIDTH - 4 * self.left_margin, self.top_margin +
+                         self.left_margin, 4 * self.left_margin, self.top_margin * self.left_margin))
 
         # Container borders
         pygame.draw.line(screen, c.PURPLE, (self.left_margin, self.top_margin),
@@ -46,11 +54,16 @@ class Rewards:
                          (self.left_margin + self.c_width, self.top_margin + self.c_height), 3)
 
         self.scrollbar.draw(screen)
+        self.home_button.draw(screen)
+        
+    def get_home_button(self) -> HomeButton:
+        return self.home_button
 
 
 class _ScrollBar(pygame.sprite.Sprite):
     def __init__(self, x: int, y: int, width: int, height: int, margin: int) -> None:
         pygame.sprite.Sprite.__init__(self)
+        self.x = x
         self.width = width
         self.margin: int = margin
         self.rect = pygame.Rect(x, y, width, height)
@@ -65,6 +78,10 @@ class _ScrollBar(pygame.sprite.Sprite):
 
     def get_pos(self) -> tuple[int, int]:
         return self.rect.x, self.rect.y
+    
+    def get_percent(self) -> float:
+        stop = c.WIDTH - 2 * self.margin - self.width
+        return ((self.rect.x - self.x) * 100) / (stop - self.x)
 
 
 class _Item:
@@ -86,5 +103,12 @@ class _Item:
                          self.y), (self.x + 96, self.y + 128))
 
         screen.blit(self.item_image, (self.x + 16, self.y + 16))
-        text = c.GAME_FONT.render(self.name, True, c.WHITE)
+        text = c.GAME_FONT_20.render(self.name, True, c.WHITE)
         screen.blit(text, (self.x + (48 - text.get_width() / 2), self.y + 100))
+        
+    def get_pos(self) -> tuple[int, int]:
+        return self.x, self.y
+    
+    def set_pos(self, x: int, y: int) -> None:
+        self.x = x
+        self.y = y

@@ -43,10 +43,13 @@ def main() -> None:
     if pygame.key.get_pressed()[pygame.K_LEFT]:
         if player.rect.x > 0:
             player.move_left(c.PLAYER_SPEED)
+            
+    if pygame.key.get_pressed()[pygame.K_ESCAPE]:
+        c.GAME_STATE = GameState.REWARDS
 
 
 def rewards() -> None:
-    rewards_scene.draw_container(screen)
+    rewards_scene.draw(screen)
     
     # Move scrollbar with keys
     if pygame.key.get_pressed()[pygame.K_LEFT]:
@@ -60,6 +63,14 @@ def rewards() -> None:
         x_offset = mouse_pos[0] - rewards_scene.scrollbar.rect.x
         if rewards_scene.scrollbar.rect.collidepoint((mouse_pos[0], mouse_pos[1])):
             rewards_scene.scrollbar.set_pos(pygame.mouse.get_pos()[0], rewards_scene.scrollbar.rect.y)"""
+            
+    # Home button
+    if pygame.mouse.get_pressed()[0]:
+        mouse_pos = pygame.mouse.get_pos()
+        home_button_pos = rewards_scene.get_home_button().get_rect()
+        if home_button_pos[0] <= mouse_pos[0] <= home_button_pos[0] + home_button_pos[2] and \
+            home_button_pos[1] <= mouse_pos[1] <= home_button_pos[1] + home_button_pos[3]:
+            rewards_scene.get_home_button().set_game_scene()
 
     
 def pause() -> None:

@@ -17,4 +17,4 @@ SHIELD_HEIGHT: int = 450
 
 GAME_STATE: GameState = GameState.PAUSE
 
-GAME_FONT: font.Font = font.Font("./font/font.ttf")
+GAME_FONT_20: font.Font = font.Font("./font/font.ttf", 20)
