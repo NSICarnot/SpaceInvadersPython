@@ -56,7 +56,7 @@ class Player(pygame.sprite.Sprite):
         
     def add_one_life(self) -> None:
         """
-        Add a number of lifes to the player
+        Add one life to the player
         :return: None
         """
         assert 1 + self.lifes > 3, "Le joueur ne peut avoir que trois vie max"
