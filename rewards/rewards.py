@@ -82,6 +82,9 @@ class _ScrollBar(pygame.sprite.Sprite):
     def get_percent(self) -> float:
         stop = c.WIDTH - 2 * self.margin - self.width
         return ((self.rect.x - self.x) * 100) / (stop - self.x)
+    
+    def get_width(self) -> int:
+        return self.width
 
 
 class _Item:

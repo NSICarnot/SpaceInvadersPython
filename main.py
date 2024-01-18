@@ -56,13 +56,14 @@ def rewards() -> None:
         rewards_scene.scrollbar.set_pos(rewards_scene.scrollbar.rect.x - 1, rewards_scene.scrollbar.rect.y)
     elif pygame.key.get_pressed()[pygame.K_RIGHT]:
         rewards_scene.scrollbar.set_pos(rewards_scene.scrollbar.rect.x + 1, rewards_scene.scrollbar.rect.y)
-        
+    
+    # TODO: Si plus sur la scrollbar mais tjr appuyé: alors continuer de bouger la scrollbar
     # Move scrollbar with mouse
-    """if pygame.mouse.get_pressed()[0]:
+    if pygame.mouse.get_pressed()[0]:
         mouse_pos = pygame.mouse.get_pos()
-        x_offset = mouse_pos[0] - rewards_scene.scrollbar.rect.x
         if rewards_scene.scrollbar.rect.collidepoint((mouse_pos[0], mouse_pos[1])):
-            rewards_scene.scrollbar.set_pos(pygame.mouse.get_pos()[0], rewards_scene.scrollbar.rect.y)"""
+            rewards_scene.scrollbar.set_pos(pygame.mouse.get_pos()[0] - rewards_scene.scrollbar.get_width() / 2,
+                                            rewards_scene.scrollbar.rect.y)
             
     # Home button
     if pygame.mouse.get_pressed()[0]:
