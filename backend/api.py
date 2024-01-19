@@ -61,5 +61,3 @@ def get_entries() -> int:
     :return: The number of entries
     """
     return requests.get(f"{url}/entries").json()
-
-print(OnlinePlayer("Test").get_best_score())
