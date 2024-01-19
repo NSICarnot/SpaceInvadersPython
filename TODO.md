@@ -1,0 +1,5 @@
+- Reset des variables de jeu
+- Centrer les boutons
+- Menu pause
+- Menu principal
+- Menu de fin de partie + score
