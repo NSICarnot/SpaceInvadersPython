@@ -1,5 +1,10 @@
 - Reset des variables de jeu
 - Centrer les boutons
 - Menu pause
-- Menu principal
+- Menu principal --> Au lancement
 - Menu de fin de partie + score
+- Enemies
+- Projectiles
+- Rewards : 
+  - JSON File
+  - Griser les items non obtenus

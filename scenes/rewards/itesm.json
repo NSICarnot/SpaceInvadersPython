@@ -1,0 +1,16 @@
+{
+    "items": [
+        {
+            "name": "Blue Shield",
+            "image_ressource": "../img/projectile.png",
+            "rarity": 0,
+            "getted": 0
+        },
+        {
+            "name": "Bink Shield",
+            "image_ressource": "../img/projectile.png",
+            "rarity": 0,
+            "getted": 1
+        }
+    ]
+}

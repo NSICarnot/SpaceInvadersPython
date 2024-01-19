@@ -1,4 +1,5 @@
 import pygame
+import json
 
 import constants as c
 from elements.button import HomeButton, ApplyButton, RemoveButton
@@ -9,12 +10,13 @@ class Rewards:
         self.font_size = 12
         self.image_size = 64
         self.spacement = 120
+        self.json_reward = ...
 
         # Container variables
         self.left_margin = 20
         self.top_margin = 225
-        self.c_width = c.WIDTH - 2*self.left_margin
-        self.c_height = c.HEIGHT - 2*self.top_margin
+        self.c_width = c.WIDTH - 2 * self.left_margin
+        self.c_height = c.HEIGHT - 2 * self.top_margin
         
         self.items = [
             _Item(self.spacement, self.top_margin + 2 * self.left_margin, "img\projectile.png", "Test", 0),
