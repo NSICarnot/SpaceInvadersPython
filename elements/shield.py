@@ -24,7 +24,7 @@ class Pixel():
 
     def draw(self, screen: pygame.Surface) -> None:
         pygame.draw.rect(
-            screen, c.GREEN, (self.__rect.x, self.__rect.y, self.__size, self.__size))
+            screen, c.LIME, (self.__rect.x, self.__rect.y, self.__size, self.__size))
 
 
 class Shield():

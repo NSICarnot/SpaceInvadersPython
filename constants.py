@@ -7,7 +7,9 @@ HEIGHT: int = 700
 
 BLACK: tuple[int, int, int] = (0, 0, 0)
 WHITE: tuple[int, int, int] = (255, 255, 255)
-GREEN: tuple[int, int, int] = (0, 255, 0)
+LIME: tuple[int, int, int] = (0, 255, 0)
+LIGHT_GREEN: tuple[int, int, int] = (0, 190, 0)
+DARK_GREEN: tuple[int, int, int] = (0, 100, 0)
 PURPLE: tuple[int, int, int] = (100, 0, 255)
 
 PLAYER_HEALTH: int = 3
