@@ -10,7 +10,7 @@ import time
 from elements.player import Player
 from elements.shield import Shield
 from game_states import GameState
-from rewards.rewards import Rewards
+from scenes.rewards.rewards import Rewards
 
 
 # Create the screen and setting up its name
