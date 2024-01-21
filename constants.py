@@ -17,6 +17,6 @@ PLAYER_SPEED: int = 1
 
 SHIELD_HEIGHT: int = 450
 
-GAME_STATE: GameState = GameState.PAUSE
+GAME_STATE: GameState = GameState.SPLASH_SCREEN
 
 GAME_FONT_20: font.Font = font.Font("./font/font.ttf", 20)

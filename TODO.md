@@ -8,3 +8,4 @@
 - Rewards : 
   - JSON File
   - Griser les items non obtenus
+- Supprimer les traits en trops sur les images

@@ -5,11 +5,13 @@ pygame.init()
 pygame.font.init()
 
 import constants as c
-import time
+import backend.helper as helper
 
 from elements.player import Player
 from elements.shield import Shield
 from game_states import GameState
+from scenes.home import Home
+from scenes.pause import Pause
 from scenes.rewards.rewards import Rewards
 
 
@@ -27,6 +29,8 @@ player.set_pos(c.WIDTH//2, 550)
 shield = Shield(100, 1)
 
 rewards_scene = Rewards()
+splash_screen_scene = Home()
+pause_scene = Pause()
 
 
 def main() -> None:
@@ -45,7 +49,7 @@ def main() -> None:
             player.move_left(c.PLAYER_SPEED)
             
     if pygame.key.get_pressed()[pygame.K_ESCAPE]:
-        c.GAME_STATE = GameState.REWARDS
+        c.GAME_STATE = GameState.PAUSE
 
 
 def rewards() -> None:
@@ -66,19 +70,29 @@ def rewards() -> None:
                                             rewards_scene.scrollbar.rect.y)
             
     # Home button
-    if pygame.mouse.get_pressed()[0]:
-        mouse_pos = pygame.mouse.get_pos()
-        home_button_pos = rewards_scene.get_home_button().get_rect()
-        if home_button_pos[0] <= mouse_pos[0] <= home_button_pos[0] + home_button_pos[2] and \
-            home_button_pos[1] <= mouse_pos[1] <= home_button_pos[1] + home_button_pos[3]:
-            rewards_scene.get_home_button().set_game_scene()
+    helper.button_pressed(rewards_scene.get_home_button())
 
     
 def pause() -> None:
-    c.GAME_STATE = GameState.REWARDS
+    pause_scene.draw(screen)
+    
+    helper.button_pressed(pause_scene.homepage_button)
+    helper.button_pressed(pause_scene.resume_button)
+    helper.button_pressed(pause_scene.restart_button)
+    helper.button_pressed(pause_scene.quit_button)
     
 
 def score() -> None:
+    ...
+    
+def splash_screen() -> None:
+    splash_screen_scene.draw(screen)
+    
+    helper.button_pressed(splash_screen_scene.start_button)
+    helper.button_pressed(splash_screen_scene.rewards_button)
+    helper.button_pressed(splash_screen_scene.quit_button)
+    
+def settings() -> None:
     ...
 
 
@@ -107,6 +121,10 @@ while True:
             rewards()
         case GameState.SCORE:
             score()
+        case GameState.SPLASH_SCREEN:
+            splash_screen()
+        case GameState.SETTINGS:
+            settings()
 
     clock.tick(240)
 

@@ -7,7 +7,6 @@ from elements.button import HomeButton, ApplyButton, RemoveButton
 
 class Rewards:
     def __init__(self) -> None:
-        self.font_size = 12
         self.image_size = 64
         self.spacement = 120
         self.json_reward = ...
@@ -32,8 +31,8 @@ class Rewards:
         self.scrollbar = _ScrollBar(2 * self.left_margin, c.HEIGHT - self.top_margin -
                                     2 * self.left_margin, 100, self.left_margin, self.left_margin)
         self.home_button = HomeButton()
-        self.apply_button = ApplyButton(150, 600, 200, 75)  # TODO: Fix the button position
-        self.remove_button = RemoveButton(450, 600, 200, 75)  # TODO: Fix the button position
+        self.apply_button = ApplyButton(166, 550, 200, 75)  # TODO: Fix the button position
+        self.remove_button = RemoveButton(532, 550, 200, 75)  # TODO: Fix the button position
 
     def draw(self, screen: pygame.Surface) -> None:
         # TODO: Draw items first
