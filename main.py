@@ -34,6 +34,9 @@ pause_scene = Pause()
 
 
 def main() -> None:
+    """
+    Boucle principale du jeu 
+    """
     player_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
     player_group.draw(screen)
 
@@ -53,6 +56,9 @@ def main() -> None:
 
 
 def rewards() -> None:
+    """
+    Affiche la scène des récompenses
+    """
     rewards_scene.draw(screen)
     
     # Move scrollbar with keys
@@ -74,6 +80,9 @@ def rewards() -> None:
 
     
 def pause() -> None:
+    """
+    Affiche la scène de pause
+    """
     pause_scene.draw(screen)
     
     helper.button_pressed(pause_scene.homepage_button)
@@ -83,9 +92,15 @@ def pause() -> None:
     
 
 def score() -> None:
+    """
+    Affiche la scène du score
+    """
     ...
     
 def splash_screen() -> None:
+    """
+    Affiche la scène d'accueil
+    """
     splash_screen_scene.draw(screen)
     
     helper.button_pressed(splash_screen_scene.start_button)
@@ -93,6 +108,9 @@ def splash_screen() -> None:
     helper.button_pressed(splash_screen_scene.quit_button)
     
 def settings() -> None:
+    """
+    Affiche la scène de paramètre
+    """
     ...
 
 

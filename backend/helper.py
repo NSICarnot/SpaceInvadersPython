@@ -3,6 +3,11 @@ import pygame
 from elements.button import Button
 
 def button_pressed(button: Button) -> bool:
+    """
+    Vérifie si un bouton (Button) à été appuyé
+    :param bouton (Button): Le bouton à vérifier
+    :return (bool): True si le bouton à été appuyé. Sinon, False
+    """
     if pygame.mouse.get_pressed()[0]:
         mouse_pos = pygame.mouse.get_pos()
         home_button_pos = button.get_rect()

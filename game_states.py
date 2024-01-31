@@ -2,6 +2,9 @@ import enum
 
 
 class GameState(enum.Enum):
+    """
+    Classe d'énumération des différents états du jeu
+    """
     PLAY: int = 0
     PAUSE: int = 1
     REWARDS: int = 2
