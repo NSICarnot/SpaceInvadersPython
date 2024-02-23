@@ -9,6 +9,7 @@ import backend.helper as helper
 
 from elements.player import Player
 from elements.shield import Shield
+from elements.invaders import Invaders
 from game_states import GameState
 from scenes.home import Home
 from scenes.pause import Pause
@@ -32,6 +33,10 @@ rewards_scene = Rewards()
 splash_screen_scene = Home()
 pause_scene = Pause()
 
+invader_group = pygame.sprite.Group()
+invader = Invaders()
+invader_group.add(invader)
+
 
 def main() -> None:
     """
@@ -41,6 +46,9 @@ def main() -> None:
     player_group.draw(screen)
 
     shield.draw(screen)
+    
+    invader_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
+    invader_group.draw(screen)
     
     # Permet de faire bouger le vaisseau du joueur
     if pygame.key.get_pressed()[pygame.K_RIGHT]:
