@@ -6,7 +6,7 @@ from abc import abstractmethod
 
 class Button:
     """
-    Classe abstraite pour les boutons de l'pplication
+    Classe abstraite pour les boutons de l'application
     """
     def __init__(self, x: int, y: int, width: int, height: int, text_color: tuple[int, int, int], text: str, background_color: tuple[int, int, int], border_radius: int = 15) -> None:
         """

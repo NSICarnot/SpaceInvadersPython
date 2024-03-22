@@ -14,6 +14,7 @@ from game_states import GameState
 from scenes.home import Home
 from scenes.pause import Pause
 from scenes.rewards.rewards import Rewards
+from scenes.end import End
 
 
 # Create the screen and setting up its name
@@ -32,11 +33,35 @@ shield = Shield(100, 1)
 rewards_scene = Rewards()
 splash_screen_scene = Home()
 pause_scene = Pause()
+end_scene = End()
 
 invader_group = pygame.sprite.Group()
 invader = Invaders()
 invader_group.add(invader)
 
+
+def reset():
+    global player, player_group
+    player = Player()
+    player_group = pygame.sprite.Group()
+    player_group.add(player)
+    player.set_pos(c.WIDTH//2, 550)
+    
+    global shield, shield
+    shield = Shield(100, 1)
+
+    global rewards_scene, splash_screen_scene, pause_scene
+    rewards_scene = Rewards()
+    splash_screen_scene = Home()
+    pause_scene = Pause()
+
+    global invader_group, invader
+    invader_group = pygame.sprite.Group()
+    invader = Invaders()
+    invader_group.add(invader)
+    
+    c.PLAYER_HEALTH = 3    
+ 
 
 def main() -> None:
     """
@@ -103,7 +128,11 @@ def score() -> None:
     """
     Affiche la scène du score
     """
-    ...
+    end_scene.draw(screen)
+    
+    helper.button_pressed(end_scene.homepage_button)
+    helper.button_pressed(end_scene.restart_button)
+    helper.button_pressed(end_scene.quit_button)
     
 def splash_screen() -> None:
     """
@@ -137,7 +166,9 @@ while True:
                 screen.fill(c.BLACK)
             if event.key == pygame.K_a:
                 shield.blow_up_pixels(50, 0, 15)
-    
+            elif event.key == pygame.K_b:
+                 c.GAME_STATE = GameState.SCORE
+  
     match c.GAME_STATE:
         case GameState.PAUSE:
             pause()

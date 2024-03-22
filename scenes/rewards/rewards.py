@@ -43,7 +43,7 @@ class Rewards:
     def draw(self, screen: pygame.Surface) -> None:
         """
         Dessine la scène à l'écrant
-        :param screen (pygame.Surface): L'écrant
+        :param screen (pygame.Surface): L'écran
         """
         # TODO: Draw items first
         for i, item in enumerate(self.items):

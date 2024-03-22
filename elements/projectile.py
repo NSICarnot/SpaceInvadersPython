@@ -15,3 +15,6 @@ class Projectile(pygame.sprite.Sprite):
     def set_pos(self, x: int, y: int):
         self.rect.y = y
         self.rect.x = x
+    
+    def draw(self, screen: pygame.Surface) -> None:
+        ...
