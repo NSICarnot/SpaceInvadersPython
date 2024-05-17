@@ -54,9 +54,9 @@ class Player(pygame.sprite.Sprite):
         """
         The method will return a boolean if no value is passed in. Otherwise, the boolean value will be changed by the new value put in parameter.
         :param value (bool | None): The value of the variable can_shoot
-        :return (bool | None):
+        :return (bool | None): 
         """
-        if not value:
+        if value == None:
             return self.__can_shoot
         else:
             self.__can_shoot = value

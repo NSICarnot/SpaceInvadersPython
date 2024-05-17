@@ -14,7 +14,9 @@ PURPLE: tuple[int, int, int] = (100, 0, 255)
 RED: tuple[int, int, int] = (255, 0, 0)
 
 PLAYER_HEALTH: int = 3
-PLAYER_SPEED: int = 1
+PLAYER_SPEED: int = 2
+
+PROJECTILE_SPEED: int = 3
 
 SHIELD_HEIGHT: int = 450
 

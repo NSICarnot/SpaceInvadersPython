@@ -4,7 +4,7 @@
 - Menu principal --> Au lancement
 - Menu de fin de partie + score
 - Enemies
-- Projectiles
+- Projectiles : fini
 - Rewards : 
   - JSON File
   - Griser les items non obtenus
@@ -15,3 +15,4 @@ ficiers modifiés:
 - end (manque les score) 
 - main
 - constants
+- projectile

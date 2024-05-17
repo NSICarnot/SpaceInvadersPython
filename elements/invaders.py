@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Group
+from elements.projectile import Projectile
 import constants as c
 
 
@@ -22,3 +23,4 @@ class Invaders(pygame.sprite.Sprite):
 
     def get_pos(self):
         return self.rect.x, self.rect.y
+        

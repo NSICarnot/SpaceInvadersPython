@@ -123,7 +123,8 @@ class Shield():
     def draw(self, screen: pygame.Surface) -> None:
         """
         Dessine le bouclier
-        :param screen (pygame.surface): L'écrant"""
+        :param screen (pygame.surface): L'écran
+        """
         for p_line in self.__pixels:
             for pixel in p_line:
                 if pixel != None:

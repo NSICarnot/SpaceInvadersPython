@@ -10,6 +10,7 @@ import backend.helper as helper
 from elements.player import Player
 from elements.shield import Shield
 from elements.invaders import Invaders
+from elements.projectile import Projectile
 from game_states import GameState
 from scenes.home import Home
 from scenes.pause import Pause
@@ -39,6 +40,7 @@ invader_group = pygame.sprite.Group()
 invader = Invaders()
 invader_group.add(invader)
 
+player_projectile = []
 
 def reset():
     global player, player_group
@@ -65,7 +67,7 @@ def reset():
 
 def main() -> None:
     """
-    Boucle principale du jeu 
+    Boucle principale du jeu  
     """
     player_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
     player_group.draw(screen)
@@ -74,6 +76,20 @@ def main() -> None:
     
     invader_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
     invader_group.draw(screen)
+    
+    for projectile in player_projectile:
+        projectile.set_pos(projectile.get_x(), projectile.get_y() - c.PROJECTILE_SPEED)
+        projectile.draw(screen)
+        
+        for invader in invader_group:
+            if invader.rect.colliderect(projectile.rect):
+                invader_group.remove(invader)
+        
+        if projectile.get_y() < -32:
+            del player_projectile[0]
+            player.can_shoot(True)
+            break
+        
     
     # Permet de faire bouger le vaisseau du joueur
     if pygame.key.get_pressed()[pygame.K_RIGHT]:
@@ -86,7 +102,12 @@ def main() -> None:
             
     if pygame.key.get_pressed()[pygame.K_ESCAPE]:
         c.GAME_STATE = GameState.PAUSE
-
+        
+    if pygame.key.get_pressed()[pygame.K_SPACE]:
+        if player.can_shoot():
+            player.can_shoot(False)
+            player_projectile.append(Projectile(player))
+    
 
 def rewards() -> None:
     """
