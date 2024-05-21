@@ -4,8 +4,6 @@ import pygame
 pygame.init()
 pygame.font.init()
 
-
-
 import constants as c
 import backend.helper as helper
 
