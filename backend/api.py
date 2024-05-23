@@ -6,7 +6,7 @@ Wrapper pour l'API disponible sur ce repo :
 https://git.hulkhogan6262.fr/NSICarnot/SpaceInvadersAPIPython
 """
 
-url = "http://192.168.1.115:80"
+url = "https://api.spaceinvaders-nsi.fr"
 
 class OnlinePlayer:
     def __init__(self, pseudo: str):
