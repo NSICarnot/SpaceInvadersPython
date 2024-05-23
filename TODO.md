@@ -1,10 +1,10 @@
 - Reset des variables de jeu : pas fini
-- Centrer les boutons : fait
-- Menu pause : fait
+- Centrer les boutons : ✔
+- Menu pause : ✔
 - Menu principal --> Au lancement
 - Menu de fin de partie + score
 - Enemies
-- Projectiles : fini
+- Projectiles : ✔
 - Rewards : 
   - JSON File
   - Griser les items non obtenus

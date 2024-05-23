@@ -24,13 +24,13 @@ class Rewards:
         self.c_height = c.HEIGHT - 2 * self.top_margin
         
         self.items = [
-            _Item(self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile.png", "Test", 0),
-            _Item(2 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile.png", "Test2", 0),
-            _Item(3 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile.png", "Test3", 0),
-            _Item(4 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile.png", "Test4", 0),
-            _Item(5 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile.png", "Test5", 0),
-            _Item(6 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile.png", "Test6", 0),
-            _Item(7 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile.png", "Test7", 0),
+            _Item(self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile/projectile1.png", "Test", 0),
+            _Item(2 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile/projectile1.png", "Test2", 0),
+            _Item(3 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile/projectile1.png", "Test3", 0),
+            _Item(4 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile/projectile1.png", "Test4", 0),
+            _Item(5 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile/projectile1.png", "Test5", 0),
+            _Item(6 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile/projectile1.png", "Test6", 0),
+            _Item(7 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile/projectile1.png", "Test7", 0),
         ]
 
         # Scrollbar

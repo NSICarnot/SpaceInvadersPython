@@ -37,7 +37,7 @@ pause_scene = Pause()
 end_scene = End()
 
 invader_group = pygame.sprite.Group()
-invader = Invaders()
+invader = Invaders(10, 10)
 invader_group.add(invader)
 
 player_projectile = []
@@ -75,7 +75,8 @@ def main() -> None:
     shield.draw(screen)
     
     invader_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
-    invader_group.draw(screen)
+    for invader in invader_group.sprites():
+        invader.draw(screen)
     
     for projectile in player_projectile:
         projectile.set_pos(projectile.get_x(), projectile.get_y() - c.PROJECTILE_SPEED)

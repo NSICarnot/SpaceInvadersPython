@@ -103,7 +103,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.died = False
 
-    def is_died(self) -> bool:
+    def is_dead(self) -> bool:
         """
         Return a boolean if the player is died or not
         :return (bool): A boolean if the player is died or not
