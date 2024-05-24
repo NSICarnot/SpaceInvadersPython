@@ -37,10 +37,12 @@ pause_scene = Pause()
 end_scene = End()
 
 invader_group = pygame.sprite.Group()
-invader = Invaders(10, 10)
-invader_group.add(invader)
+for y in range(1, 6):
+    for x in range(1, 6):
+        invader = Invaders(60*x, 60*y)
+        invader_group.add(invader)
 
-player_projectile = []
+player_projectile: Projectile | None = None
 
 def reset():
     global player, player_group
@@ -69,28 +71,11 @@ def main() -> None:
     """
     Boucle principale du jeu  
     """
+    global player_projectile
     player_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
     player_group.draw(screen)
 
     shield.draw(screen)
-    
-    invader_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
-    for invader in invader_group.sprites():
-        invader.draw(screen)
-    
-    for projectile in player_projectile:
-        projectile.set_pos(projectile.get_x(), projectile.get_y() - c.PROJECTILE_SPEED)
-        projectile.draw(screen)
-        
-        for invader in invader_group:
-            if invader.rect.colliderect(projectile.rect):
-                invader_group.remove(invader)
-        
-        if projectile.get_y() < -32:
-            del player_projectile[0]
-            player.can_shoot(True)
-            break
-        
     
     # Permet de faire bouger le vaisseau du joueur
     if pygame.key.get_pressed()[pygame.K_RIGHT]:
@@ -107,7 +92,27 @@ def main() -> None:
     if pygame.key.get_pressed()[pygame.K_SPACE]:
         if player.can_shoot():
             player.can_shoot(False)
-            player_projectile.append(Projectile(player))
+            player_projectile = Projectile(player)
+    
+    invader_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
+    for invader in invader_group.sprites():
+        invader.draw(screen)
+        
+    if not player_projectile == None:
+        player_projectile.set_pos(player_projectile.get_x(), player_projectile.get_y() - c.PROJECTILE_SPEED)
+        player_projectile.draw(screen)
+        
+        for invader in invader_group:
+            print(1)
+            if player_projectile is not None and invader.get_rect().colliderect(player_projectile.rect):
+                invader_group.remove(invader)
+                print('ok')
+                player_projectile = None
+                player.can_shoot(True)
+                    
+        if player_projectile is not None and player_projectile.get_y() < -32:
+            player_projectile = None
+            player.can_shoot(True)
     
 
 def rewards() -> None:
@@ -188,7 +193,7 @@ while True:
                 screen.fill(c.BLACK)
             if event.key == pygame.K_a:
                 shield.blow_up_pixels(50, 0, 15)
-            elif event.key == pygame.K_b:
+            elif len(invader_group) == 0:
                  c.GAME_STATE = GameState.SCORE
   
     match c.GAME_STATE:
