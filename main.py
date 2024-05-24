@@ -1,3 +1,11 @@
+"""Fichier principal du Space Invaders
+
+@Author: Lallement Jean-Michel
+@Author: Catillion Timéo
+@Author: Mannessier--Salembien Nathan
+@Author: Évrard--Lorrain Soren
+"""
+
 import pygame
 
 # Initialize the pygame window
@@ -103,10 +111,8 @@ def main() -> None:
         player_projectile.draw(screen)
         
         for invader in invader_group:
-            print(1)
             if player_projectile is not None and invader.get_rect().colliderect(player_projectile.rect):
                 invader_group.remove(invader)
-                print('ok')
                 player_projectile = None
                 player.can_shoot(True)
                     
