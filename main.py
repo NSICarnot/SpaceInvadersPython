@@ -35,9 +35,9 @@ pygame.display.set_caption("SpaceInvaders - NSI 1ere 2023-2024")
 player = Player()
 player_group = pygame.sprite.Group()
 player_group.add(player)
-player.set_pos(c.WIDTH//2, 550)
+player.set_pos(c.WIDTH//2, 590)
 
-shield = Shield(100, 1)
+shields: list[Shield] = [Shield(100, 1)]
 
 rewards_scene = Rewards()
 splash_screen_scene = Home()
@@ -83,7 +83,8 @@ def main() -> None:
     player_group.clear(surface=screen, bgd=pygame.Surface((c.WIDTH, c.HEIGHT)))
     player_group.draw(screen)
 
-    shield.draw(screen)
+    for shield in shields:
+        shield.draw(screen)
     
     # Permet de faire bouger le vaisseau du joueur
     if pygame.key.get_pressed()[pygame.K_RIGHT]:
@@ -110,6 +111,13 @@ def main() -> None:
         player_projectile.set_pos(player_projectile.get_x(), player_projectile.get_y() - c.PROJECTILE_SPEED)
         player_projectile.draw(screen)
         
+        for shield in shields:
+            if shield.collide_projectile(player_projectile):
+                shield.blow_up_pixels(player_projectile.get_x() - shield.get_pos()[0], player_projectile.get_y() - shield.get_pos()[1], c.EXPLOSION_RADIUS)
+                player_projectile = None
+                player.can_shoot(True)
+                break
+        
         for invader in invader_group:
             if player_projectile is not None and invader.get_rect().colliderect(player_projectile.rect):
                 invader_group.remove(invader)
@@ -119,6 +127,9 @@ def main() -> None:
         if player_projectile is not None and player_projectile.get_y() < -32:
             player_projectile = None
             player.can_shoot(True)
+            
+        if len(invader_group) == 0:
+            c.GAME_STATE = GameState.SCORE
     
 
 def rewards() -> None:
@@ -136,7 +147,7 @@ def rewards() -> None:
     # TODO: Si plus sur la scrollbar mais tjr appuyé: alors continuer de bouger la scrollbar
     # Move scrollbar with mouse
     if pygame.mouse.get_pressed()[0]:
-        mouse_pos = pygame.mouse.get_pos()
+        mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         if rewards_scene.scrollbar.rect.collidepoint((mouse_pos[0], mouse_pos[1])):
             rewards_scene.scrollbar.set_pos(pygame.mouse.get_pos()[0] - rewards_scene.scrollbar.get_width() / 2,
                                             rewards_scene.scrollbar.rect.y)
@@ -198,9 +209,7 @@ while True:
             if event.key == pygame.K_SPACE:
                 screen.fill(c.BLACK)
             if event.key == pygame.K_a:
-                shield.blow_up_pixels(50, 0, 15)
-            elif len(invader_group) == 0:
-                 c.GAME_STATE = GameState.SCORE
+                shields[0].blow_up_pixels(50, 0, c.EXPLOSION_RADIUS)
   
     match c.GAME_STATE:
         case GameState.PAUSE:

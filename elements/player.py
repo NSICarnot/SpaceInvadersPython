@@ -2,10 +2,10 @@ import pygame
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self) -> None:
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("img/player.png")
-        self.rect = self.image.get_rect()
+        self.image: pygame.Surface = pygame.image.load("img/player.png")
+        self.rect: pygame.Rect = self.image.get_rect()
         self.__can_shoot: bool = True
         self.lifes: int = 3
         self.died: bool = False

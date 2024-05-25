@@ -3,6 +3,7 @@ import math
 import random as r
 
 import constants as c
+from elements.projectile import Projectile
 
 
 class Pixel():
@@ -71,12 +72,13 @@ class Shield():
         :return (None):
         """
         # The position anchor is the left top hand corner
-        self.__pos: tuple[int] = (x, c.SHIELD_HEIGHT)
+        self.__pos: tuple[int, int] = (x, c.SHIELD_HEIGHT)
         self.__size: int = size
         self.__pixels: list[list[Pixel | None]] = []
+        self.__width: int = 100
 
         # Create the shield Pixels list
-        for y in range(100):
+        for y in range(self.__width // self.__size):
             self.__pixels.append([])
             for x in range(100):
                 self.__pixels[y].append(
@@ -119,6 +121,11 @@ class Shield():
         :return (None): None
         """
         self.__pixels = pixels
+        
+    def pixel_at(self, x: int, y: int) -> bool:
+        if self.__pos[0] <= x <= self.__pos[0] + self.__width // self.__size and c.SHIELD_HEIGHT <= y <= c.SHIELD_HEIGHT + self.__width // self.__size:
+            return self.__pixels[y - self.__pos[1]][x -self.__pos[0]] is not None
+        return False
 
     def draw(self, screen: pygame.Surface) -> None:
         """
@@ -127,12 +134,12 @@ class Shield():
         """
         for p_line in self.__pixels:
             for pixel in p_line:
-                if pixel != None:
+                if pixel is not None:
                     pixel.draw(screen)
 
     def blow_up_pixels(self, x: int, y: int, radius: float) -> None:
         """
-        Pop with a chance of 20% the calculated pixels which were in the radius of the explosion . Somme pixels won't be deleted to looks like the original game.
+        Pop with a chance of 20% the calculated pixels which were in the radius of the explosion. Somme pixels won't be deleted to looks like the original game.
         :param x (int): The x coordinate of the impact
         :param y (int): The y coordinate of the impact 
         """
@@ -143,3 +150,10 @@ class Shield():
                     if math.sqrt((xp - x) ** 2 + (yp - y) ** 2) <= radius:
                         self.__pixels[yp].pop(xp)
                         self.__pixels[yp].insert(xp, None)
+                        
+    def collide_projectile(self, projectile: Projectile) -> bool:
+        for line in self.__pixels:
+            for _ in line:
+                if self.pixel_at(projectile.get_x(), projectile.get_y()):
+                    return True
+        return False

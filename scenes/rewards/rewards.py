@@ -20,10 +20,10 @@ class Rewards:
         # Container variables
         self.left_margin = 20
         self.top_margin = 225
-        self.c_width = c.WIDTH - 2 * self.left_margin
-        self.c_height = c.HEIGHT - 2 * self.top_margin
+        self.c_width: int = c.WIDTH - 2 * self.left_margin
+        self.c_height: int = c.HEIGHT - 2 * self.top_margin
         
-        self.items = [
+        self.items: list[_Item] = [
             _Item(self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile/projectile1.png", "Test", 0),
             _Item(2 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile/projectile1.png", "Test2", 0),
             _Item(3 * self.spacement, self.top_margin + 2 * self.left_margin, "./img/projectile/projectile1.png", "Test3", 0),
